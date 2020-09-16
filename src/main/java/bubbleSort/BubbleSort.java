@@ -17,7 +17,7 @@ public class BubbleSort {
         /**
          * Define and initialize int Array
          */
-        int[] A = {9, 3, 4, 2, 5, 8, 6, 1, 7};
+        int[] A = {0, 9, 4, 6, 2, 8, 5, 1, 7, 3};
 
         /**
         * https://en.wikipedia.org/wiki/Bubble_sort
@@ -36,9 +36,10 @@ public class BubbleSort {
         /**
         * Prints result
         */
-        for (int x = 0; x < A.length; x++) {
-            System.out.print(A[x]);
+        //for (int x = 0; x < A.length; x++) {
+        //   System.out.print(A[x]);
+            for (int value : A) System.out.print(value + " ");
         }
 
     }
-}
+
