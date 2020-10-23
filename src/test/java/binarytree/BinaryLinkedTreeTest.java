@@ -99,6 +99,8 @@ class BinaryLinkedTreeTest {
         tree.levelOrder(BinaryLinkedTree.outputMethod);
         assertEquals("6 3 9 1 5 7 10 4 8 ", outContent.toString());
     }
+
+    //TODO
     @Test
     void searchTest(){
         //positive Test
