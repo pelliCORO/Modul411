@@ -239,8 +239,7 @@ public class BinaryLinkedTree<T extends Comparable<T>> implements BinaryTree<T> 
                 System.out.println(e);
             }
 
-            // put t's children on queue
-            if (treeNode.getLeft() != null)
+            // put t's children on queueindf (treeNode.getLeft() != null)
                 queue.put(treeNode.getLeft());
             if (treeNode.getRight() != null)
                 queue.put(treeNode.getRight());

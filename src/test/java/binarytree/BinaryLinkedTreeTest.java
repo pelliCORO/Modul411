@@ -106,11 +106,15 @@ class BinaryLinkedTreeTest {
 
     }
 
+
     @Test
     void remove(){
         assertNotNull(tree.findNode(3));
         tree.remove(3);
         assertNull(tree.findNode(3));
+        tree.levelOrder(BinaryLinkedTree.outputMethod);
+        assertEquals("6 5 9 1 7 10 ", outContent.toString());
+
     }
 
 
