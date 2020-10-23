@@ -106,29 +106,29 @@ class BinaryLinkedTreeTest {
         //find methode mit einem element das es gibt
         assertTrue(tree.find(3));
 
-        //find methode mit element das es NICHT gibt
-        assertFalse(tree.find(30));
+        //find methode mit einem element das es gibt
+        assertTrue(tree.find(6));
 
         //serach methode mit element das es  gibt-->NOT NULL
         assertNotNull(tree.search(1));
 
-        //serach methode mit element das es NICHT gibt-->NULL
-        assertNull(tree.search(8));
+        //serach methode mit element das es  gibt-->NOT NULL
+        assertNotNull(tree.search(5));
 
 
-        //negative Tests(Diese Test sollen failen)
 
-        //find methode mit einem element das es gibt-->Falsch weil es das element gibt(find gibt True zurück)
-        assertFalse(tree.find(6));
+        //negative Tests
+        //find methode mit einem element das es NICHT gibt
+        assertFalse(tree.find(13));
 
-        //find methode mit element das es NICHT gibt -->Falsch weil es das element NICHT gibt(find gibt False zurück)
-        assertTrue(tree.find(50));
+        //find methode mit einem element das es NICHT gibt
+        assertFalse(tree.find(11));
 
-        //serach methode mit element das es gibt --> Falsch weil NOT Null zurück gegeben wird da es existiert
-        assertNull(tree.search(1));
-
-        //serach methode mit element das es NICHT gibt-->Falsch weil Null zurück gegeben wird da es NICHT existiert
+        //serach methode mit element das es NICHT gibt-->NOT NULL
         assertNull(tree.search(12));
+
+        //serach methode mit element das es NICHT gibt-->NOT NULL
+        assertNull(tree.search(14));
 
 
 
