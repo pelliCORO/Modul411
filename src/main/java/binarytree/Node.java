@@ -28,6 +28,7 @@ public class Node<T extends Comparable<T>> implements Comparable<T> {
      * @param payload Zu speichernde Daten im Knoten
      */
     public Node(T payload) {
+
         this.payload = payload;
     }
 
@@ -49,8 +50,26 @@ public class Node<T extends Comparable<T>> implements Comparable<T> {
      * negative ganze Zahl, null oder eine positive Zahl, wenn dieses Objekt
      * kleiner, gleich oder grösser als das angegebene Objekt ist.
      */
+
     public int compareTo(@NotNull T object) {
+
         return payload.compareTo(object);
+    }
+
+    public int compareToForFind(@NotNull T object) {
+        //ich will aus der var obj ein  integer machen(doppelt casten)
+        /*
+        aus object ein node
+        (Node)object
+        rufe getPaylod um T zu bekommen
+        ((Node)object).getpayload
+        ich mache aus T ein Integer
+        (Integer)((Node)object).getpayload
+        weise den integer einer variable zu
+        Integer myInt =(Integer)((Node)object).getPayload();
+         */
+        Integer param =(Integer)((Node)object).getPayload();
+        return ((Integer)(payload)).compareTo(param);
     }
 
 }
