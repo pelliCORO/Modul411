@@ -285,9 +285,5 @@ public class BinaryLinkedTree<T extends Comparable<T>> implements BinaryTree<T> 
         return (leftHeight > rightHeight) ? ++leftHeight : ++rightHeight;
     }
 
-    public boolean delete(T element){
-
-        return true;
-    }
 
 }
