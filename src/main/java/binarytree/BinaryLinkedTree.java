@@ -289,7 +289,7 @@ public class BinaryLinkedTree<T extends Comparable<T>> implements BinaryTree<T> 
     //TODO
     public Node<T> search(T element) {
 
-        Node<T> n = root.getRight();
+        Node<T> n = root;
         while (n != null) {
             int cmp = n.getPayload().compareTo(element);
             if (cmp == 0)
