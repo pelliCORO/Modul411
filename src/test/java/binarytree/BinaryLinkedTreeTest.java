@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BinaryLinkedTreeTest {
 
@@ -73,6 +72,7 @@ class BinaryLinkedTreeTest {
     }
 
     @Test
+
     void height() {
         assertEquals(3, tree.height());
     }
@@ -99,5 +99,20 @@ class BinaryLinkedTreeTest {
         tree.levelOrder(BinaryLinkedTree.outputMethod);
         assertEquals("6 3 9 1 5 7 10 4 8 ", outContent.toString());
     }
+    @Test
+    void findNote(){
+        assertNotNull(tree.findNode(3));
+        assertNull(tree.findNode(8));
+
+    }
+
+    @Test
+    void remove(){
+        assertNotNull(tree.findNode(3));
+        tree.remove(3);
+        assertNull(tree.findNode(3));
+    }
+
+
 
 }
