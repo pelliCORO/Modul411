@@ -100,13 +100,18 @@ class BinaryLinkedTreeTest {
         assertEquals("6 3 9 1 5 7 10 4 8 ", outContent.toString());
     }
     @Test
-    void findNote(){
-        assertNotNull(tree.findNode(3));
-        assertNull(tree.findNode(8));
+    void searchTest(){
+        //positive Test
+        assertFalse(tree.find(3));
+
+        //negative Tests
+        assertNull(tree.search(8));
+
 
     }
 
 
+    /*
     @Test
     void remove(){
         assertNotNull(tree.findNode(6));
@@ -115,7 +120,7 @@ class BinaryLinkedTreeTest {
         tree.inOrder(BinaryLinkedTree.outputMethod);
         assertEquals("1 3 5 7 9 10 ", outContent.toString());
 
-    }
+    }*/
 
 
 

@@ -56,7 +56,9 @@ public class Node<T extends Comparable<T>> implements Comparable<T> {
         return payload.compareTo(object);
     }
 
-    public int compareToForFind(@NotNull T object) {
+
+
+   /* public int compareToForFind(@NotNull T object) {
         //ich will aus der var obj ein  integer machen(doppelt casten)
         /*
         aus object ein node
@@ -67,9 +69,10 @@ public class Node<T extends Comparable<T>> implements Comparable<T> {
         (Integer)((Node)object).getpayload
         weise den integer einer variable zu
         Integer myInt =(Integer)((Node)object).getPayload();
-         */
+
         Integer param =(Integer)((Node)object).getPayload();
         return ((Integer)(payload)).compareTo(param);
     }
+    */
 
 }

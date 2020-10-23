@@ -240,7 +240,7 @@ public class BinaryLinkedTree<T extends Comparable<T>> implements BinaryTree<T> 
             }
 
             // put t's children on queueindf (treeNode.getLeft() != null)
-                queue.put(treeNode.getLeft());
+            queue.put(treeNode.getLeft());
             if (treeNode.getRight() != null)
                 queue.put(treeNode.getRight());
 
@@ -286,21 +286,36 @@ public class BinaryLinkedTree<T extends Comparable<T>> implements BinaryTree<T> 
         return (leftHeight > rightHeight) ? ++leftHeight : ++rightHeight;
     }
 
+    //TODO
+    public Node<T> search(T element) {
+
+        Node<T> n = root.getRight();
+        while (n != null) {
+            int cmp = n.getPayload().compareTo(element);
+            if (cmp == 0)
+                return n;
+            else
+                n = (cmp > 0 ? n.getLeft() : n.getRight());
+        }
+        return null;
+    }
+    public boolean find(T element) {
+        return (search(element) != null);
+    }
+
+    /*public Node<T> findNode(T param) {
 
 
-     public Node findNode(T param) {
-
-
-         Node payload = new Node<>(param, null, null);
-         // Start at the top of the tree
-        Node focusNode = root;
+        Node<T> payload = new Node<>(param, null, null);
+        // Start at the top of the tree
+        Node<T> focusNode = root;
         // While we haven't found the Node
         // keep looking
-        while  ( ! (focusNode.compareToForFind(payload)==0)) {
+        while (!(focusNode.getPayload().compareTo(param) == 0)) {
 
-         // If we should search to the left
+            // If we should search to the left
 //            if (key < focusNode.key) {
-            if (payload.compareToForFind(focusNode)==-1) {
+            if (payload.getPayload().compareTo(param) == -1) {
                 // Shift the focus Node to the left child
                 focusNode = focusNode.getLeft();
             } else {
@@ -314,97 +329,65 @@ public class BinaryLinkedTree<T extends Comparable<T>> implements BinaryTree<T> 
         return focusNode;
     }
 
-    public boolean remove(T param) {
+     */
+
+  /*  public boolean remove(T param) {
 
 
-        Node payload = new Node<>(param, null, null);
         // Start at the top of the tree
-        Node focusNode = root;
-        Node parent = root;
-        // When searching for a Node this will
-        // tell us whether to search to the
-        // right or left
-        boolean isItALeftChild = true;
-        // While we haven't found the Node
-        // keep looking
-        while (!  (focusNode.compareToForFind(payload)==0)  ) {
-            parent = focusNode;
-            // If we should search to the left
-            if (focusNode.compareToForFind(payload)==1) {
-                isItALeftChild = true;
-                // Shift the focus Node to the left child
-                focusNode = focusNode.getLeft();
-            } else {
-                // Greater than focus node so go to the right
-                isItALeftChild = false;
-                // Shift the focus Node to the right child
-                focusNode = focusNode.getRight();
+        Node<T> focusNode = root;
+        Node<T> parent = root;
+        Node<T> tmp = null;
+
+
+        //zu löschenden Knoten suchen
+        while (focusNode != null) {
+            int cmp = focusNode.compareTo(param);
+            if (cmp == 0)
+                break;
+            else {
+                parent = focusNode;
+                focusNode = (cmp > 0 ? focusNode.getLeft() : focusNode.getRight());
             }
-            // The node wasn't found
-            if (focusNode == null)
-                return false;
         }
-        // If Node doesn't have children delete it
+
+        //nichts gefunden
+        if (focusNode == null)
+            return false;
+
+        //Fall 1: ein zu löschender Node ist ein Blatt
         if (focusNode.getLeft() == null && focusNode.getRight() == null) {
-            // If root delete it
-            if (focusNode == root)
-                root = null;
-                // If it was marked as a left child
-                // of the parent delete it in its parent
-            else if (isItALeftChild)
-                parent.setLeft(null);
+            parent = null;
 
-                // Vice versa for the right child
-            else
-                parent.setRight(null);
+            return true;
         }
-        // If no right child
-        else if (focusNode.getRight() == null) {
-            if (focusNode == root)
-                root = focusNode.getLeft();
-                // If focus Node was on the left of parent
-                // move the focus Nodes left child up to the
-                // parent node
-            else if (isItALeftChild)
-                parent.setLeft(focusNode.getLeft());
-                // Vice versa for the right child
-            else
-                parent.setRight(focusNode.getLeft());
-        }
-        // If no left child
-        else if (focusNode.getLeft() == null) {
-            if (focusNode == root)
-                root = focusNode.getRight();
-                // If focus Node was on the left of parent
-                // move the focus Nodes right child up to the
-                // parent node
-            else if (isItALeftChild)
-                parent.setLeft(focusNode.getRight());
-                // Vice versa for the left child
-            else
+
+        //Fall 2:
+        if (focusNode.getLeft() == null)
+            parent = focusNode.getRight();
+        else if (focusNode.getRight() == null)
+            parent = focusNode.getLeft();
+        else { // Fall 3
+            // minimales Element suchen
+            parent = focusNode.getRight();
+            tmp = focusNode;
+            while (parent.getLeft() != null) {
+                tmp = parent;
+                parent = parent.getLeft();
+            }
+            parent.setLeft(focusNode.getLeft());
+            if (tmp != focusNode) {
+                tmp.setLeft(parent.getRight());
                 parent.setRight(focusNode.getRight());
-
+            }
         }
-        // Two children so I need to find the deleted nodes
-        // replacement
-        else {
-            Node replacement = getReplacementNode(focusNode);
-            // If the focusNode is root replace root
-            // with the replacement
-            if (focusNode == root)
-                root = replacement;
-                // If the deleted node was a left child
-                // make the replacement the left child
-
-            else if (isItALeftChild)
-
-                parent.setLeft(replacement);
-                // Vice versa if it was a right child
-            else
-                parent.setRight(replacement);
-            replacement.setLeft(focusNode.getLeft());
-        }
+        if (parent.getLeft() == focusNode)
+            parent.setLeft(parent);
+        else
+            parent.setRight(parent);
         return true;
+
+
     }
 
 
@@ -424,12 +407,11 @@ public class BinaryLinkedTree<T extends Comparable<T>> implements BinaryTree<T> 
         // right child into the replacements rightChild
         if (replacement != replacedNode.getRight()) {
             replacementParent.setLeft(replacement.getRight());
-            replacement.setRight(replacedNode.getRight()) ;
+            replacement.setRight(replacedNode.getRight());
         }
         return replacement;
     }
-
-
-
+*/
 
 }
+

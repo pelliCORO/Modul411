@@ -60,4 +60,8 @@ public interface BinaryTree<T extends Comparable<T>> {
 
     void levelOrder(Method visit);
 
+    Node<T> search(T element);
+
+    boolean find(T element);
+
 }
